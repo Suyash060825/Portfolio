@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash | Portfolio</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <h2>Yash</h2>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <ul id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="hero-content">
+    <h1 id="typing"></h1>
+    <p>Software Engineer | AI | Problem Solver</p>
+
+    <div class="buttons">
+      <a href="#projects">View Work</a>
+      <a href="#contact">Hire Me</a>
+    </div>
+
+    <div class="socials">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="fade">
+<h2>About Me</h2>
+<img src="images/profile.jpg" class="profile">
+<p>
+Computer Science student focused on building scalable applications and solving real-world problems using modern technologies.
+</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="fade">
+<h2>Skills</h2>
+
+<div class="skill-grid">
+<div class="skill-card">Frontend<br>HTML, CSS, JS</div>
+<div class="skill-card">Backend<br>Java, Python</div>
+<div class="skill-card">Tools<br>Git, SQL</div>
+</div>
+
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="fade">
+<h2>Education</h2>
+
+<div class="timeline">
+<div class="timeline-item">
+<h3>B.Tech CSE</h3>
+<p>XYZ University (2022–2026)</p>
+</div>
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="fade">
+<h2>Projects</h2>
+
+<div class="filters">
+<button onclick="filterProjects('all')">All</button>
+<button onclick="filterProjects('web')">Web</button>
+<button onclick="filterProjects('ai')">AI</button>
+</div>
+
+<div class="project-container">
+
+<div class="project-card web">
+<h3>Hospital Management</h3>
+<p>Improved workflow efficiency by 40%.</p>
+<a href="#">GitHub</a>
+<a href="#">Live</a>
+</div>
+
+<div class="project-card ai">
+<h3>AI Summarizer</h3>
+<p>Reduced text length by 70%.</p>
+<a href="#">GitHub</a>
+<a href="#">Live</a>
+</div>
+
+</div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates" class="fade">
+<h2>Certificates</h2>
+
+<div class="cert-grid">
+<img src="images/cert1.jpg" onclick="openModal(this.src)">
+<img src="images/cert2.jpg" onclick="openModal(this.src)">
+</div>
+
+</section>
+
+<div id="modal" onclick="closeModal()">
+<img id="modal-img">
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="fade">
+<h2>Contact</h2>
+
+<form id="form">
+<input type="text" placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Message"></textarea>
+<button>Send</button>
+</form>
+
+</section>
+
+<button id="topBtn" onclick="scrollTop()">↑</button>
+
+<footer>
+<p>© 2026 Yash</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

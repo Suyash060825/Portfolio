@@ -1,0 +1,342 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #020617;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+/* REMOVE DEFAULT STYLES */
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= LOADER ================= */
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #020617;
+    z-index: 999;
+}
+
+/* ================= NAVBAR ================= */
+nav {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+nav h2 {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    font-size: 14px;
+    color: #cbd5f5;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #8b5cf6;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero p {
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.buttons a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 22px;
+    border-radius: 6px;
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.buttons a:hover {
+    transform: translateY(-3px);
+}
+
+/* SOCIAL */
+.socials a {
+    margin: 0 10px;
+    font-size: 18px;
+    color: #94a3b8;
+    transition: 0.3s;
+}
+
+.socials a:hover {
+    color: #8b5cf6;
+}
+
+/* ================= SECTION ================= */
+section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* ================= ABOUT ================= */
+.profile {
+    width: 120px;
+    border-radius: 50%;
+    margin: 20px 0;
+    border: 3px solid #6366f1;
+}
+
+/* ================= SKILLS ================= */
+.skill-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skill-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.08);
+}
+
+/* ================= EDUCATION ================= */
+.timeline {
+    margin-top: 20px;
+}
+
+.timeline-item {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 400px;
+}
+
+/* ================= PROJECTS ================= */
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters button {
+    margin: 5px;
+    padding: 8px 16px;
+    border: none;
+    background: #1e293b;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.filters button:hover {
+    background: #6366f1;
+}
+
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-card {
+    background: rgba(255,255,255,0.05);
+    margin: 15px;
+    padding: 20px;
+    width: 260px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+.project-card a {
+    display: inline-block;
+    margin: 5px;
+    font-size: 13px;
+    color: #8b5cf6;
+}
+
+/* ================= CERTIFICATES ================= */
+.cert-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cert-grid img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cert-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* MODAL */
+#modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+#modal img {
+    max-width: 80%;
+}
+
+/* ================= CONTACT ================= */
+form input, form textarea {
+    width: 80%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background: #6366f1;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+/* ================= SCROLL BUTTON ================= */
+#topBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border: none;
+    background: #6366f1;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* ================= ANIMATION ================= */
+.fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width: 768px){
+
+    nav ul {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #020617;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
