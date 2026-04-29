@@ -3,148 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yash | Portfolio</title>
-
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Yash — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- LOADER -->
-<div id="loader"></div>
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-text">Loading</span>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
 
 <!-- NAV -->
 <nav id="navbar">
-  <h2>Yash</h2>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-logo">Y<span class="dot">.</span></div>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span>
+  </div>
   <ul id="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certificates">Certificates</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#education" onclick="closeMenu()">Education</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#certificates" onclick="closeMenu()">Certs</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <canvas id="bgCanvas"></canvas>
-
   <div class="hero-content">
-    <h1 id="typing"></h1>
-    <p>Software Engineer | AI | Problem Solver</p>
-
-    <div class="buttons">
-      <a href="#projects">View Work</a>
-      <a href="#contact">Hire Me</a>
+    <div class="hero-eyebrow reveal-up" style="--d:0.1s">Available for opportunities</div>
+    <h1 class="hero-title">
+      <span class="reveal-up" style="--d:0.2s">Hi, I'm</span>
+      <span class="hero-name reveal-up" style="--d:0.35s">Yash</span>
+    </h1>
+    <p class="hero-sub reveal-up" style="--d:0.5s">
+      Software Engineer &nbsp;·&nbsp; AI &nbsp;·&nbsp; Problem Solver
+    </p>
+    <div class="hero-actions reveal-up" style="--d:0.65s">
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="#contact" class="btn btn-ghost">Hire Me</a>
     </div>
+    <div class="socials reveal-up" style="--d:0.8s">
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">scroll</div>
+</section>
 
-    <div class="socials">
-      <a href="#"><i class="fab fa-github"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
+<!-- ABOUT -->
+<section id="about" class="section fade-section">
+  <div class="section-label">01 / About</div>
+  <div class="about-layout">
+    <div class="about-left">
+      <div class="profile-wrap">
+        <img src="images/profile.jpg" class="profile-img" alt="Yash">
+        <div class="profile-deco"></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <h2 class="section-title">Building things<br>that <em>matter</em></h2>
+      <p class="about-bio">
+        Computer Science student with a focus on scalable applications, AI systems, and clean engineering. I care deeply about building software that actually works — not just looks good.
+      </p>
+      <div class="about-tags">
+        <span>Problem Solver</span>
+        <span>Fast Learner</span>
+        <span>AI Enthusiast</span>
+        <span>Open Source</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="fade">
-<h2>About Me</h2>
-<img src="images/profile.jpg" class="profile">
-<p>
-Computer Science student focused on building scalable applications and solving real-world problems using modern technologies.
-</p>
-</section>
-
 <!-- SKILLS -->
-<section id="skills" class="fade">
-<h2>Skills</h2>
-
-<div class="skill-grid">
-<div class="skill-card">Frontend<br>HTML, CSS, JS</div>
-<div class="skill-card">Backend<br>Java, Python</div>
-<div class="skill-card">Tools<br>Git, SQL</div>
-</div>
-
+<section id="skills" class="section fade-section">
+  <div class="section-label">02 / Skills</div>
+  <h2 class="section-title">What I work with</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">Frontend</div>
+      <div class="skill-items">
+        <div class="skill-pill">HTML</div>
+        <div class="skill-pill">CSS</div>
+        <div class="skill-pill">JavaScript</div>
+        <div class="skill-pill">React</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Backend</div>
+      <div class="skill-items">
+        <div class="skill-pill">Java</div>
+        <div class="skill-pill">Python</div>
+        <div class="skill-pill">Node.js</div>
+        <div class="skill-pill">REST APIs</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Tools & Data</div>
+      <div class="skill-items">
+        <div class="skill-pill">Git</div>
+        <div class="skill-pill">SQL</div>
+        <div class="skill-pill">MySQL</div>
+        <div class="skill-pill">Machine Learning</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- EDUCATION -->
-<section id="education" class="fade">
-<h2>Education</h2>
-
-<div class="timeline">
-<div class="timeline-item">
-<h3>B.Tech CSE</h3>
-<p>XYZ University (2022–2026)</p>
-</div>
-</div>
-
+<section id="education" class="section fade-section">
+  <div class="section-label">03 / Education</div>
+  <h2 class="section-title">Where I've studied</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2022 — 2026</div>
+        <h3>B.Tech Computer Science & Engineering</h3>
+        <p>XYZ University</p>
+        <div class="timeline-tags">
+          <span>Data Structures</span>
+          <span>AI/ML</span>
+          <span>System Design</span>
+          <span>DBMS</span>
+        </div>
+      </div>
+    </div>
+    <!-- Add more timeline items here -->
+  </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="fade">
-<h2>Projects</h2>
+<section id="projects" class="section fade-section">
+  <div class="section-label">04 / Projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('web', this)">Web</button>
+    <button class="filter-btn" onclick="filterProjects('ai', this)">AI</button>
+    <button class="filter-btn" onclick="filterProjects('blockchain', this)">Blockchain</button>
+  </div>
+  <div class="projects-grid" id="projectsGrid">
 
-<div class="filters">
-<button onclick="filterProjects('all')">All</button>
-<button onclick="filterProjects('web')">Web</button>
-<button onclick="filterProjects('ai')">AI</button>
-</div>
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">01</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span>Web</span><span>Full-Stack</span>
+        </div>
+        <h3>Hospital Management System</h3>
+        <p>Automated patient records, appointments & billing. Reduced manual processing time by 40% through intelligent workflow design.</p>
+        <div class="project-stack">HTML · CSS · JavaScript · MySQL</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
 
-<div class="project-container">
+    <article class="project-card ai" data-cat="ai">
+      <div class="project-number">02</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span>AI</span><span>NLP</span>
+        </div>
+        <h3>AI Text Summarizer</h3>
+        <p>NLP pipeline using transformer models that reduces document length by 70% while preserving key context and meaning.</p>
+        <div class="project-stack">Python · Transformers · HuggingFace</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
 
-<div class="project-card web">
-<h3>Hospital Management</h3>
-<p>Improved workflow efficiency by 40%.</p>
-<a href="#">GitHub</a>
-<a href="#">Live</a>
-</div>
+    <article class="project-card blockchain" data-cat="blockchain">
+      <div class="project-number">03</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span>Blockchain</span><span>Web3</span>
+        </div>
+        <h3>Blockchain Voting System</h3>
+        <p>Secure decentralized voting via smart contracts. Eliminates duplicate votes and ensures 100% transparent, tamper-proof results.</p>
+        <div class="project-stack">Solidity · Web3.js · Ethereum</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
 
-<div class="project-card ai">
-<h3>AI Summarizer</h3>
-<p>Reduced text length by 70%.</p>
-<a href="#">GitHub</a>
-<a href="#">Live</a>
-</div>
-
-</div>
+  </div>
 </section>
 
 <!-- CERTIFICATES -->
-<section id="certificates" class="fade">
-<h2>Certificates</h2>
-
-<div class="cert-grid">
-<img src="images/cert1.jpg" onclick="openModal(this.src)">
-<img src="images/cert2.jpg" onclick="openModal(this.src)">
-</div>
-
+<section id="certificates" class="section fade-section">
+  <div class="section-label">05 / Certificates</div>
+  <h2 class="section-title">Credentials</h2>
+  <div class="cert-grid">
+    <div class="cert-card" onclick="openModal('images/cert1.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert1.jpg" alt="Certificate 1">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+    <div class="cert-card" onclick="openModal('images/cert2.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert2.jpg" alt="Certificate 2">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+    <!-- Add more cert-cards here -->
+  </div>
 </section>
 
+<!-- MODAL -->
 <div id="modal" onclick="closeModal()">
-<img id="modal-img">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <img id="modal-img" alt="Certificate">
 </div>
 
 <!-- CONTACT -->
-<section id="contact" class="fade">
-<h2>Contact</h2>
-
-<form id="form">
-<input type="text" placeholder="Name" required>
-<input type="email" placeholder="Email" required>
-<textarea placeholder="Message"></textarea>
-<button>Send</button>
-</form>
-
+<section id="contact" class="section fade-section">
+  <div class="section-label">06 / Contact</div>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <h2 class="section-title">Let's work<br>together</h2>
+      <p class="contact-sub">Open to internships, full-time roles, and interesting projects.</p>
+      <div class="contact-detail"><i class="fas fa-envelope"></i> your@email.com</div>
+      <div class="contact-social">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="fname" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="femail" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="fmsg" placeholder="What's on your mind?" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span id="btnText">Send Message</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div id="formMsg" class="form-msg"></div>
+      </form>
+    </div>
+  </div>
 </section>
 
-<button id="topBtn" onclick="scrollTop()">↑</button>
-
+<!-- FOOTER -->
 <footer>
-<p>© 2026 Yash</p>
+  <div class="footer-inner">
+    <span class="footer-logo">Yash<span class="dot">.</span></span>
+    <span class="footer-copy">© 2026 — Built with care</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
 </footer>
+
+<!-- SCROLL TO TOP -->
+<button id="topBtn" onclick="scrollTop()" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
 <script src="script.js"></script>
 </body>
