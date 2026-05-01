@@ -13,10 +13,9 @@ window.addEventListener('load', () => {
 
 // ── CUSTOM CURSOR ──
 const cursor = document.getElementById('cursor');
-const trail = document.getElementById('cursor-trail');
-
+const trail  = document.getElementById('cursor-trail');
 if (cursor && trail && window.innerWidth > 768) {
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top  = e.clientY + 'px';
     setTimeout(() => {
@@ -24,22 +23,270 @@ if (cursor && trail && window.innerWidth > 768) {
       trail.style.top  = e.clientY + 'px';
     }, 80);
   });
-
-  // Scale on interactive elements
-  const hoverEls = document.querySelectorAll('a, button, .project-card, .cert-card, .skill-pill');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px';
-      cursor.style.height = '20px';
-      cursor.style.opacity = '0.6';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '10px';
-      cursor.style.height = '10px';
-      cursor.style.opacity = '1';
-    });
+  document.querySelectorAll('a, button, .project-card, .cert-card, .skill-chips span, .stab').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; cursor.style.opacity='.6'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; cursor.style.opacity='1'; });
   });
 }
+
+// ── GLOBAL STAR CANVAS (covers entire page) ──
+(function initStars() {
+  const canvas = document.getElementById('starCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); buildNebula(); });
+
+  // ── Star layers: far / mid / close ──
+  const LAYERS = [
+    { count: 300, minSize: 0.2, maxSize: 0.6,  minOp: 0.15, maxOp: 0.5,  twinkleMin: 0.002, twinkleMax: 0.006 },
+    { count: 130, minSize: 0.6, maxSize: 1.3,  minOp: 0.35, maxOp: 0.85, twinkleMin: 0.006, twinkleMax: 0.018 },
+    { count:  45, minSize: 1.3, maxSize: 2.8,  minOp: 0.55, maxOp: 1.0,  twinkleMin: 0.012, twinkleMax: 0.030 }
+  ];
+
+  // Color tints: 0=blue-white, 1=warm white, 2=purple, 3=teal, 4=amber
+  const TINTS = [
+    [210, 225, 255],
+    [255, 248, 230],
+    [200, 180, 255],
+    [180, 240, 240],
+    [255, 230, 180]
+  ];
+
+  const stars = [];
+  LAYERS.forEach((l, li) => {
+    for (let i = 0; i < l.count; i++) {
+      const size = l.minSize + Math.random() * (l.maxSize - l.minSize);
+      const tint = TINTS[Math.floor(Math.random() * TINTS.length)];
+      // Bigger stars more likely to be colorful
+      const chosenTint = (size > 1.5 && Math.random() > 0.4)
+        ? TINTS[2 + Math.floor(Math.random() * 3)]
+        : tint;
+      stars.push({
+        x:        Math.random(),
+        y:        Math.random(),
+        size,
+        baseOp:   l.minOp + Math.random() * (l.maxOp - l.minOp),
+        op:       0,
+        phase:    Math.random() * Math.PI * 2,
+        tSpeed:   l.twinkleMin + Math.random() * (l.twinkleMax - l.twinkleMin),
+        // Occasional "pulse" — star briefly flares brighter
+        pulseTimer: 200 + Math.floor(Math.random() * 600),
+        pulseActive: false,
+        pulseOp:  0,
+        layer:    li,
+        tint:     chosenTint
+      });
+    }
+  });
+
+  // ── Shooting stars ──
+  const shooters = [];
+  function spawnShooter() {
+    if (shooters.length < 3) {
+      const spd = 8 + Math.random() * 10;
+      const ang = -(0.3 + Math.random() * 0.4);
+      shooters.push({
+        x:     Math.random(),
+        y:     Math.random() * 0.5,
+        vx:    Math.cos(ang) * spd,
+        vy:    Math.abs(Math.sin(ang)) * spd + 2,
+        len:   100 + Math.random() * 80,
+        alpha: 0,
+        fadingIn: true,
+        fade:  0.013 + Math.random() * 0.008
+      });
+    }
+    setTimeout(spawnShooter, 3000 + Math.random() * 6000);
+  }
+  setTimeout(spawnShooter, 1800);
+
+  // ── Aurora wave (drifts down through full page) ──
+  let auroraOffset = 0;
+
+  // ── Nebula offscreen canvas ──
+  let nebula = null;
+  function buildNebula() {
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const c = off.getContext('2d');
+
+    // Deep purple-blue core top-left
+    const g1 = c.createRadialGradient(W*.25, H*.12, 0, W*.25, H*.12, W*.6);
+    g1.addColorStop(0,   'rgba(14,6,40,0.6)');
+    g1.addColorStop(0.5, 'rgba(8,11,22,0.3)');
+    g1.addColorStop(1,   'rgba(0,0,0,0)');
+    c.fillStyle = g1; c.fillRect(0,0,W,H);
+
+    // Purple nebula cloud mid-right
+    const g2 = c.createRadialGradient(W*.78, H*.3, 0, W*.78, H*.3, W*.38);
+    g2.addColorStop(0,   'rgba(80,40,160,0.10)');
+    g2.addColorStop(0.6, 'rgba(50,20,100,0.04)');
+    g2.addColorStop(1,   'rgba(0,0,0,0)');
+    c.fillStyle = g2; c.fillRect(0,0,W,H);
+
+    // Teal cloud bottom-left
+    const g3 = c.createRadialGradient(W*.08, H*.72, 0, W*.08, H*.72, W*.28);
+    g3.addColorStop(0,   'rgba(15,90,120,0.09)');
+    g3.addColorStop(1,   'rgba(0,0,0,0)');
+    c.fillStyle = g3; c.fillRect(0,0,W,H);
+
+    // Faint center glow
+    const g4 = c.createRadialGradient(W*.5, H*.5, 0, W*.5, H*.5, W*.4);
+    g4.addColorStop(0,   'rgba(30,15,70,0.06)');
+    g4.addColorStop(1,   'rgba(0,0,0,0)');
+    c.fillStyle = g4; c.fillRect(0,0,W,H);
+
+    nebula = off;
+  }
+  buildNebula();
+
+  let frame = 0;
+
+  function draw() {
+    // Catch page height changes (lazy-loaded content etc.)
+    const liveH = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+    if (Math.abs(liveH - H) > 80) { H = canvas.height = liveH; buildNebula(); }
+
+    ctx.clearRect(0, 0, W, H);
+
+    // 1. Nebula
+    if (nebula) ctx.drawImage(nebula, 0, 0, W, H);
+
+    // 2. Aurora ribbons across full page height
+    auroraOffset += 0.003;
+    for (let r = 0; r < 3; r++) {
+      const yBase = H * (0.15 + r * 0.35);
+      const amp   = 60 + r * 30;
+      const freq  = 0.0008 + r * 0.0003;
+      const phase = auroraOffset + r * 2.1;
+      const col   = r === 0
+        ? [124, 106, 255]
+        : r === 1
+          ? [60, 160, 200]
+          : [200, 255, 87];
+
+      ctx.save();
+      ctx.globalAlpha = 0.018 + 0.006 * Math.sin(auroraOffset * 1.3 + r);
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 4) {
+        const y = yBase + Math.sin(x * freq + phase) * amp
+                        + Math.sin(x * freq * 1.7 + phase * 0.8) * (amp * 0.4);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.lineWidth = 120 + 60 * Math.sin(auroraOffset * 0.7 + r);
+      ctx.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},1)`;
+      ctx.filter = `blur(28px)`;
+      ctx.stroke();
+      ctx.filter = 'none';
+      ctx.restore();
+    }
+
+    // 3. Stars
+    frame++;
+    stars.forEach(s => {
+      s.phase += s.tSpeed;
+
+      // Pulse logic
+      s.pulseTimer--;
+      if (s.pulseTimer <= 0 && !s.pulseActive) {
+        s.pulseActive = true;
+        s.pulseOp     = 0;
+        s.pulseTimer  = 300 + Math.floor(Math.random() * 500);
+      }
+      let extra = 0;
+      if (s.pulseActive) {
+        s.pulseOp += 0.04;
+        extra = Math.sin(s.pulseOp) * 0.4;
+        if (s.pulseOp >= Math.PI) { s.pulseActive = false; extra = 0; }
+      }
+
+      const twinkle = 0.5 + 0.5 * Math.sin(s.phase);
+      s.op = Math.min(1, s.baseOp * (0.5 + 0.5 * twinkle) + extra);
+
+      const sx = s.x * W;
+      const sy = s.y * H;
+      const [r, g, b] = s.tint;
+
+      // Cross flare on bright big stars
+      if (s.size > 1.6 && s.op > 0.5) {
+        const fl = s.size * (3.5 + extra * 2);
+        ctx.save();
+        ctx.globalAlpha = s.op * 0.3;
+        ctx.strokeStyle = `rgba(${r},${g},${b},1)`;
+        ctx.lineWidth   = 0.5;
+        ctx.beginPath(); ctx.moveTo(sx-fl,sy); ctx.lineTo(sx+fl,sy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(sx,sy-fl); ctx.lineTo(sx,sy+fl); ctx.stroke();
+        ctx.restore();
+      }
+
+      // Glow halo on large stars
+      if (s.size > 1.8 && s.op > 0.4) {
+        const grad = ctx.createRadialGradient(sx,sy,0, sx,sy, s.size*5);
+        grad.addColorStop(0,   `rgba(${r},${g},${b},${s.op*0.25})`);
+        grad.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.size*5, 0, Math.PI*2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(sx, sy, s.size, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${s.op})`;
+      ctx.fill();
+    });
+
+    // 4. Shooting stars
+    for (let i = shooters.length - 1; i >= 0; i--) {
+      const s = shooters[i];
+      if (s.fadingIn) {
+        s.alpha = Math.min(1, s.alpha + 0.08);
+        if (s.alpha >= 1) s.fadingIn = false;
+      } else {
+        s.alpha -= s.fade;
+      }
+
+      const sx = s.x * W, sy = s.y * H;
+      const tailX = sx - s.vx * (s.len / 10);
+      const tailY = sy - s.vy * (s.len / 10);
+
+      ctx.save();
+      ctx.globalAlpha = s.alpha;
+      const gl = ctx.createLinearGradient(sx, sy, tailX, tailY);
+      gl.addColorStop(0,    'rgba(255,255,245,1)');
+      gl.addColorStop(0.15, 'rgba(200,255,87,0.7)');
+      gl.addColorStop(0.5,  'rgba(180,160,255,0.3)');
+      gl.addColorStop(1,    'rgba(0,0,0,0)');
+      ctx.strokeStyle = gl;
+      ctx.lineWidth   = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(tailX, tailY);
+      ctx.stroke();
+      // Tiny bright head
+      ctx.beginPath();
+      ctx.arc(sx, sy, 1.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fill();
+      ctx.restore();
+
+      s.x += s.vx / W;
+      s.y += s.vy / H;
+      if (s.alpha <= 0 || s.x > 1.3 || s.y > 1.2) shooters.splice(i, 1);
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 // ── NAVBAR ──
 const navbar = document.getElementById('navbar');
@@ -50,324 +297,146 @@ window.addEventListener('scroll', () => {
 
 // ── MOBILE MENU ──
 function toggleMenu() {
-  const links = document.getElementById('nav-links');
+  const links  = document.getElementById('nav-links');
   const toggle = document.getElementById('menuToggle');
   links.classList.toggle('open');
   toggle.classList.toggle('open');
   document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
 }
 function closeMenu() {
-  const links = document.getElementById('nav-links');
-  const toggle = document.getElementById('menuToggle');
-  links.classList.remove('open');
-  toggle.classList.remove('open');
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('menuToggle').classList.remove('open');
   document.body.style.overflow = '';
 }
+function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-// ── SCROLL TO TOP ──
-function scrollTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+// ── SKILLS TABS ──
+document.querySelectorAll('.stab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    panel.classList.add('active');
+    // Animate bars in the newly shown panel
+    setTimeout(() => animateBars(panel), 50);
+  });
+});
+
+function animateBars(container) {
+  container.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    bar.classList.remove('animated');
+    void bar.offsetWidth; // reflow
+    bar.classList.add('animated');
+  });
+}
+// Animate the default active panel on load
+window.addEventListener('load', () => {
+  const firstPanel = document.querySelector('.skills-panel.active');
+  if (firstPanel) setTimeout(() => animateBars(firstPanel), 400);
+});
+
+// ── STAT COUNTER ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1800;
+  const step = 16;
+  const increments = Math.ceil(duration / step);
+  let current = 0;
+  const timer = setInterval(() => {
+    current++;
+    const progress = current / increments;
+    // easeOutExpo
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    el.textContent = Math.round(eased * target);
+    if (current >= increments) { el.textContent = target; clearInterval(timer); }
+  }, step);
 }
 
-// ── INTERSECTION OBSERVER (fade-in sections) ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+// ── PROGRESS BAR ANIMATION (Currently section) ──
+function animateProgressBars(container) {
+  container.querySelectorAll('.progress-fill').forEach(bar => {
+    bar.classList.remove('animated');
+    void bar.offsetWidth;
+    bar.classList.add('animated');
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+}
 
-document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+// ── INTERSECTION OBSERVER ──
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+
+    // Stat counters
+    entry.target.querySelectorAll('.stat-number').forEach(el => animateCounter(el));
+
+    // Skill bars (in case the default panel is visible on scroll)
+    const activePanel = entry.target.querySelector('.skills-panel.active');
+    if (activePanel) animateBars(activePanel);
+
+    // Progress fills
+    animateProgressBars(entry.target);
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.fade-section').forEach(el => sectionObs.observe(el));
 
 // ── PROJECT FILTER ──
 function filterProjects(type, btn) {
-  // Update active button
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-
-  const cards = document.querySelectorAll('.project-card');
-  cards.forEach(card => {
+  document.querySelectorAll('.project-card').forEach((card, i) => {
     const show = type === 'all' || card.dataset.cat === type;
     card.style.display = show ? 'flex' : 'none';
-
     if (show) {
-      // Stagger animate in
       card.style.opacity = '0';
       card.style.transform = 'translateY(20px)';
       setTimeout(() => {
-        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        card.style.transition = 'opacity .4s ease, transform .4s ease';
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
-      }, 50);
+      }, i * 60);
     }
   });
 }
 
-// ── STARS IN SPACE CANVAS ──
-(function initStars() {
-  const canvas = document.getElementById('bgCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  let W, H, mouse = { x: -9999, y: -9999 };
-
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // --- Star layers (parallax depths) ---
-  const LAYERS = [
-    { count: 220, speed: 0.008, sizeRange: [0.3, 0.8],  opacityRange: [0.3, 0.6] },
-    { count: 100, speed: 0.018, sizeRange: [0.8, 1.5],  opacityRange: [0.5, 0.9] },
-    { count: 35,  speed: 0.032, sizeRange: [1.5, 2.8],  opacityRange: [0.7, 1.0] }
-  ];
-
-  const stars = [];
-
-  LAYERS.forEach((layer, li) => {
-    for (let i = 0; i < layer.count; i++) {
-      const size = layer.sizeRange[0] + Math.random() * (layer.sizeRange[1] - layer.sizeRange[0]);
-      stars.push({
-        x:       Math.random() * 2000 - 1000,
-        y:       Math.random() * 2000 - 1000,
-        size,
-        baseOpacity: layer.opacityRange[0] + Math.random() * (layer.opacityRange[1] - layer.opacityRange[0]),
-        opacity: 0,
-        twinkleSpeed: 0.005 + Math.random() * 0.015,
-        twinklePhase: Math.random() * Math.PI * 2,
-        speed:   layer.speed,
-        layer:   li,
-        // shooting star chance only on layer 2
-        isShooting: false
-      });
-    }
+// ── CARD TILT ──
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r  = card.getBoundingClientRect();
+    const rx = ((e.clientY - r.top  - r.height/2) / (r.height/2)) * 5;
+    const ry = ((e.clientX - r.left - r.width/2)  / (r.width/2))  * -5;
+    card.style.transform    = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    card.style.transition   = 'transform .1s ease';
   });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform  = '';
+    card.style.transition = 'transform .35s cubic-bezier(0.4,0,0.2,1)';
+  });
+});
 
-  // --- Shooting stars ---
-  const shooters = [];
-  function spawnShooter() {
-    if (shooters.length < 2 && Math.random() < 0.3) {
-      const angle = -0.4 + Math.random() * -0.3; // steep diagonal
-      const speed = 8 + Math.random() * 10;
-      shooters.push({
-        x:     Math.random() * W,
-        y:     Math.random() * H * 0.5,
-        vx:    Math.cos(angle) * speed,
-        vy:    Math.sin(angle) * speed + speed * 0.4,
-        len:   80 + Math.random() * 100,
-        alpha: 1,
-        fade:  0.015 + Math.random() * 0.01
-      });
-    }
-    setTimeout(spawnShooter, 3000 + Math.random() * 5000);
-  }
-  setTimeout(spawnShooter, 2000);
-
-  // --- Nebula gradient (subtle, painted once per resize) ---
-  let nebulaCache = null;
-  function buildNebula() {
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const c = off.getContext('2d');
-
-    // Deep space base
-    const bg = c.createRadialGradient(W*0.3, H*0.4, 0, W*0.3, H*0.4, W*0.7);
-    bg.addColorStop(0,   'rgba(20, 10, 50, 0.55)');
-    bg.addColorStop(0.5, 'rgba(8, 11, 20, 0.3)');
-    bg.addColorStop(1,   'rgba(0, 0, 0, 0)');
-    c.fillStyle = bg;
-    c.fillRect(0, 0, W, H);
-
-    // Purple nebula cloud
-    const neb1 = c.createRadialGradient(W*0.65, H*0.3, 0, W*0.65, H*0.3, W*0.35);
-    neb1.addColorStop(0,   'rgba(100, 60, 180, 0.12)');
-    neb1.addColorStop(0.5, 'rgba(70, 30, 140, 0.05)');
-    neb1.addColorStop(1,   'rgba(0,0,0,0)');
-    c.fillStyle = neb1;
-    c.fillRect(0, 0, W, H);
-
-    // Teal nebula accent
-    const neb2 = c.createRadialGradient(W*0.15, H*0.7, 0, W*0.15, H*0.7, W*0.3);
-    neb2.addColorStop(0,   'rgba(30, 120, 150, 0.1)');
-    neb2.addColorStop(1,   'rgba(0,0,0,0)');
-    c.fillStyle = neb2;
-    c.fillRect(0, 0, W, H);
-
-    nebulaCache = off;
-  }
-  buildNebula();
-  window.addEventListener('resize', buildNebula);
-
-  let t = 0;
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Nebula
-    if (nebulaCache) ctx.drawImage(nebulaCache, 0, 0);
-
-    // Parallax offset from mouse
-    const ox = (mouse.x / W - 0.5) * 30;
-    const oy = (mouse.y / H - 0.5) * 30;
-
-    // Stars
-    stars.forEach(s => {
-      // Twinkle
-      s.twinklePhase += s.twinkleSpeed;
-      const twinkle = 0.5 + 0.5 * Math.sin(s.twinklePhase);
-      s.opacity = s.baseOpacity * (0.6 + 0.4 * twinkle);
-
-      // Screen position with depth-scaled parallax
-      const depth = (s.layer + 1) / LAYERS.length;
-      const sx = ((s.x + W / 2 + ox * depth) % W + W) % W;
-      const sy = ((s.y + H / 2 + oy * depth) % H + H) % H;
-
-      // Draw star — larger stars get a subtle cross flare
-      ctx.save();
-      ctx.globalAlpha = s.opacity;
-
-      if (s.size > 1.8) {
-        // Cross flare
-        const fLen = s.size * 3.5;
-        const grad = ctx.createLinearGradient(sx - fLen, sy, sx + fLen, sy);
-        grad.addColorStop(0, 'rgba(255,255,255,0)');
-        grad.addColorStop(0.5, `rgba(255,255,255,${s.opacity * 0.4})`);
-        grad.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 0.5;
-        ctx.beginPath(); ctx.moveTo(sx - fLen, sy); ctx.lineTo(sx + fLen, sy); ctx.stroke();
-
-        const grad2 = ctx.createLinearGradient(sx, sy - fLen, sx, sy + fLen);
-        grad2.addColorStop(0, 'rgba(255,255,255,0)');
-        grad2.addColorStop(0.5, `rgba(255,255,255,${s.opacity * 0.4})`);
-        grad2.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.strokeStyle = grad2;
-        ctx.beginPath(); ctx.moveTo(sx, sy - fLen); ctx.lineTo(sx, sy + fLen); ctx.stroke();
-      }
-
-      // Core dot — slightly warm/cool tint variation
-      const hue = s.layer === 2 ? 'rgba(220,230,255,' : s.layer === 1 ? 'rgba(255,250,240,' : 'rgba(200,210,255,';
-      ctx.beginPath();
-      ctx.arc(sx, sy, s.size, 0, Math.PI * 2);
-      ctx.fillStyle = hue + s.opacity + ')';
-      ctx.fill();
-
-      ctx.restore();
-    });
-
-    // Shooting stars
-    for (let i = shooters.length - 1; i >= 0; i--) {
-      const s = shooters[i];
-      ctx.save();
-      ctx.globalAlpha = s.alpha;
-      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * (s.len / 10), s.y - s.vy * (s.len / 10));
-      grad.addColorStop(0, 'rgba(255,255,240,0.9)');
-      grad.addColorStop(0.3, 'rgba(200,255,87,0.4)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(s.x - s.vx * (s.len / 10), s.y - s.vy * (s.len / 10));
-      ctx.stroke();
-      ctx.restore();
-
-      s.x += s.vx;
-      s.y += s.vy;
-      s.alpha -= s.fade;
-      if (s.alpha <= 0 || s.x > W + 200 || s.y > H + 200) shooters.splice(i, 1);
-    }
-
-    t++;
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-
-  // Mouse parallax
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    hero.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    hero.addEventListener('mouseleave', () => {
-      mouse.x = W / 2;
-      mouse.y = H / 2;
-    });
-  }
-})();
-
-// ── CERTIFICATE MODAL ──
+// ── MODAL ──
 function openModal(src) {
   const modal = document.getElementById('modal');
-  const img   = document.getElementById('modal-img');
-  img.src = src;
+  document.getElementById('modal-img').src = src;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.remove('open');
+  document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
-// Close modal with Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ── CONTACT FORM ──
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn  = document.querySelector('#contactForm button');
-  const msg  = document.getElementById('formMsg');
-  const text = document.getElementById('btnText');
-
-  // Simple validation
-  const name  = document.getElementById('fname').value.trim();
-  const email = document.getElementById('femail').value.trim();
-  const msgTxt = document.getElementById('fmsg').value.trim();
-
-  if (!name || !email || !msgTxt) {
-    msg.textContent = 'Please fill in all fields.';
-    msg.className   = 'form-msg error';
-    return;
-  }
-
-  const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailReg.test(email)) {
-    msg.textContent = 'Please enter a valid email.';
-    msg.className   = 'form-msg error';
-    return;
-  }
-
-  // Simulate sending
-  btn.disabled = true;
-  text.textContent = 'Sending...';
-
-  setTimeout(() => {
-    btn.disabled = false;
-    text.textContent = 'Send Message';
-    msg.textContent = '✓ Message sent! I\'ll get back to you soon.';
-    msg.className   = 'form-msg success';
-    e.target.reset();
-
-    setTimeout(() => { msg.textContent = ''; }, 5000);
-  }, 1500);
-}
-
-// ── ACTIVE NAV LINK on scroll ──
+// ── ACTIVE NAV ON SCROLL ──
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  sections.forEach(section => {
-    const top = section.offsetTop - 120;
-    const bot = top + section.offsetHeight;
-    const id  = section.getAttribute('id');
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 130;
+    const bot = top + sec.offsetHeight;
+    const id  = sec.getAttribute('id');
     const link = document.querySelector(`#nav-links a[href="#${id}"]`);
     if (!link) return;
     if (scrollY >= top && scrollY < bot) {
@@ -375,23 +444,39 @@ window.addEventListener('scroll', () => {
       link.style.color = '#c8ff57';
     }
   });
-});
+}, { passive: true });
 
-// ── CARD TILT EFFECT ──
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rx = ((y - cy) / cy) * 5;
-    const ry = ((x - cx) / cx) * -5;
-    card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    card.style.transition = 'transform 0.1s ease';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
-  });
-});
+// ── CONTACT FORM ──
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn   = document.querySelector('#contactForm button[type="submit"]');
+  const msg   = document.getElementById('formMsg');
+  const label = document.getElementById('btnText');
+
+  const name  = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const text  = document.getElementById('fmsg').value.trim();
+
+  if (!name || !email || !text) {
+    msg.textContent = 'Please fill in all fields.';
+    msg.className   = 'form-msg error';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent = 'Please enter a valid email.';
+    msg.className   = 'form-msg error';
+    return;
+  }
+
+  btn.disabled = true;
+  label.textContent = 'Sending...';
+
+  setTimeout(() => {
+    btn.disabled = false;
+    label.textContent = 'Send Message';
+    msg.textContent   = '✓ Message sent! I\'ll get back to you soon.';
+    msg.className     = 'form-msg success';
+    e.target.reset();
+    setTimeout(() => { msg.textContent = ''; }, 5000);
+  }, 1500);
+}
