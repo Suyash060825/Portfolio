@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- GLOBAL STAR CANVAS -->
+<canvas id="starCanvas"></canvas>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-name">Y<span>.</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <span class="loader-pct" id="loaderPct">0%</span>
+  </div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Y<span class="dot">.</span></div>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span>
+  </div>
+  <ul id="nav-links">
+    <li><a href="#about"        onclick="closeMenu()">About</a></li>
+    <li><a href="#skills"       onclick="closeMenu()">Skills</a></li>
+    <li><a href="#education"    onclick="closeMenu()">Education</a></li>
+    <li><a href="#projects"     onclick="closeMenu()">Projects</a></li>
+    <li><a href="#github"       onclick="closeMenu()">GitHub</a></li>
+    <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
+    <li><a href="#certificates" onclick="closeMenu()">Certs</a></li>
+    <li><a href="#contact"      onclick="closeMenu()">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal-up" style="--d:0.1s">
+      <span class="eyebrow-dot"></span>Available for opportunities
+    </div>
+    <h1 class="hero-title">
+      <span class="reveal-up" style="--d:0.2s">Hi, I'm</span>
+      <span class="hero-name reveal-up" style="--d:0.35s">Yash</span>
+    </h1>
+    <p class="hero-sub reveal-up" style="--d:0.5s">
+      Software Engineer &nbsp;&middot;&nbsp; AI &nbsp;&middot;&nbsp; Problem Solver
+    </p>
+    <div class="hero-actions reveal-up" style="--d:0.65s">
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="resume.pdf" download class="btn btn-ghost"><i class="fas fa-download"></i> Resume</a>
+      <a href="#contact"  class="btn btn-outline">Hire Me</a>
+    </div>
+    <div class="socials reveal-up" style="--d:0.8s">
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">scroll</div>
+</section>
+
+<!-- 01 ABOUT -->
+<section id="about" class="section fade-section">
+  <div class="section-label">01 / About</div>
+  <div class="about-layout">
+    <div class="about-left">
+      <div class="profile-wrap">
+        <img src="images/profile.jpg" class="profile-img" alt="Yash">
+        <div class="profile-deco"></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <h2 class="section-title">Building things<br>that <em>matter</em></h2>
+      <p class="about-bio">
+        Computer Science student with a focus on scalable applications, AI systems, and clean engineering. I care deeply about building software that actually works — not just looks good.
+      </p>
+      <div class="about-tags">
+        <span>Problem Solver</span>
+        <span>Fast Learner</span>
+        <span>AI Enthusiast</span>
+        <span>Open Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 SKILLS -->
+<section id="skills" class="section fade-section">
+  <div class="section-label">02 / Skills</div>
+  <h2 class="section-title">What I work with</h2>
+
+  <div class="skills-tabs">
+    <button class="stab active" data-tab="frontend">Frontend</button>
+    <button class="stab" data-tab="backend">Backend</button>
+    <button class="stab" data-tab="tools">Tools &amp; Data</button>
+    <button class="stab" data-tab="ai">AI / ML</button>
+  </div>
+
+  <div class="skills-panels">
+    <div class="skills-panel active" id="tab-frontend">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>HTML &amp; CSS</span><span class="skill-pct">92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>JavaScript</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>React</span><span class="skill-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Responsive Design</span><span class="skill-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span><span>React</span><span>Tailwind</span><span>Figma</span></div>
+    </div>
+    <div class="skills-panel" id="tab-backend">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Java</span><span class="skill-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Python</span><span class="skill-pct">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:78%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Node.js</span><span class="skill-pct">60%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:60%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>REST APIs</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>Java</span><span>Python</span><span>Node.js</span><span>Express</span><span>REST APIs</span><span>OOP</span></div>
+    </div>
+    <div class="skills-panel" id="tab-tools">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Git &amp; GitHub</span><span class="skill-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>SQL / MySQL</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Linux / CLI</span><span class="skill-pct">65%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>VS Code</span><span class="skill-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:95%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>Git</span><span>GitHub</span><span>MySQL</span><span>Postman</span><span>Linux</span><span>Docker (basic)</span></div>
+    </div>
+    <div class="skills-panel" id="tab-ai">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Machine Learning</span><span class="skill-pct">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>NLP / Transformers</span><span class="skill-pct">62%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:62%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Data Analysis</span><span class="skill-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Deep Learning</span><span class="skill-pct">52%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:52%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>scikit-learn</span><span>HuggingFace</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>TensorFlow</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 STATS -->
+<section id="achievements" class="achievements-strip fade-section">
+  <div class="section-inner">
+    <div class="section-label" style="text-align:center;margin-bottom:48px;">03 / By the numbers</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">Projects shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="400">0</div>
+        <div class="stat-label">LeetCode problems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="8">0</div>
+        <div class="stat-label">Technologies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 EDUCATION -->
+<section id="education" class="section fade-section">
+  <div class="section-label">04 / Education</div>
+  <h2 class="section-title">Where I've studied</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2022 — 2026</div>
+        <h3>B.Tech Computer Science &amp; Engineering</h3>
+        <p>XYZ University</p>
+        <div class="timeline-tags">
+          <span>Data Structures</span><span>AI/ML</span><span>System Design</span><span>DBMS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROJECTS -->
+<section id="projects" class="section fade-section">
+  <div class="section-label">05 / Projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('web', this)">Web</button>
+    <button class="filter-btn" onclick="filterProjects('ai', this)">AI</button>
+    <button class="filter-btn" onclick="filterProjects('blockchain', this)">Blockchain</button>
+  </div>
+  <div class="projects-grid" id="projectsGrid">
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">01</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Web</span><span>Full-Stack</span></div>
+        <h3>Hospital Management System</h3>
+        <p>Automated patient records, appointments &amp; billing. Reduced manual processing time by 40% through intelligent workflow design.</p>
+        <div class="project-stack">HTML · CSS · JavaScript · MySQL</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+    <article class="project-card ai" data-cat="ai">
+      <div class="project-number">02</div>
+      <div class="project-body">
+        <div class="project-tags"><span>AI</span><span>NLP</span></div>
+        <h3>AI Text Summarizer</h3>
+        <p>NLP pipeline using transformer models that reduces document length by 70% while preserving key context and meaning.</p>
+        <div class="project-stack">Python · Transformers · HuggingFace</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+    <article class="project-card blockchain" data-cat="blockchain">
+      <div class="project-number">03</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Blockchain</span><span>Web3</span></div>
+        <h3>Blockchain Voting System</h3>
+        <p>Secure decentralized voting via smart contracts. Eliminates duplicate votes and ensures 100% transparent, tamper-proof results.</p>
+        <div class="project-stack">Solidity · Web3.js · Ethereum</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 06 GITHUB ACTIVITY -->
+<section id="github" class="section fade-section">
+  <div class="section-label">06 / GitHub</div>
+  <h2 class="section-title">Code in the <em>open</em></h2>
+  <div class="github-layout">
+    <div class="github-stats-wrap">
+      <img
+        src="https://github-readme-stats.vercel.app/api?username=YOUR_GITHUB_USERNAME&show_icons=true&theme=transparent&title_color=c8ff57&text_color=8490a8&icon_color=7c6aff&border_color=ffffff15&hide_border=false&bg_color=0d1120"
+        alt="GitHub Stats"
+        class="github-stat-img"
+        loading="lazy"
+      >
+      <img
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_GITHUB_USERNAME&layout=compact&theme=transparent&title_color=c8ff57&text_color=8490a8&border_color=ffffff15&bg_color=0d1120"
+        alt="Top Languages"
+        class="github-stat-img"
+        loading="lazy"
+      >
+    </div>
+    <div class="github-streak-wrap">
+      <img
+        src="https://github-readme-streak-stats.herokuapp.com?user=YOUR_GITHUB_USERNAME&theme=transparent&ring=c8ff57&fire=7c6aff&currStreakLabel=c8ff57&sideLabels=8490a8&dates=8490a8&border=ffffff15"
+        alt="GitHub Streak"
+        class="github-streak-img"
+        loading="lazy"
+      >
+    </div>
+  </div>
+  <div class="github-cta">
+    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn btn-ghost">
+      <i class="fab fa-github"></i> View All Repositories
+    </a>
+  </div>
+</section>
+
+<!-- 07 TESTIMONIALS -->
+<section id="testimonials" class="section fade-section">
+  <div class="section-label">07 / What people say</div>
+  <h2 class="section-title">Testimonials</h2>
+  <div class="testimonials-grid">
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Yash consistently delivered clean, well-structured code. His ability to pick up new concepts quickly and apply them to real problems stood out in our team project.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">KS</div>
+        <div>
+          <div class="testi-name">Prof. K. Sharma</div>
+          <div class="testi-role">CS Faculty, XYZ University</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Working with Yash on the hospital system was a great experience. He took ownership of the database layer completely and optimized queries we didn't even know were slow.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Ravi Kumar</div>
+          <div class="testi-role">Team Lead, Hackathon Project</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">One of the most proactive students I've mentored. Yash asks the right questions, ships fast, and never stops iterating until it actually works.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div>
+          <div class="testi-name">Aarav Mehta</div>
+          <div class="testi-role">Senior Dev, Open Source Mentor</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 08 CURRENTLY LEARNING -->
+<section id="currently" class="section fade-section">
+  <div class="section-label">08 / Right now</div>
+  <h2 class="section-title">What I'm <em>exploring</em></h2>
+  <div class="currently-grid">
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-brain"></i></div>
+      <div class="currently-body">
+        <h3>Large Language Models</h3>
+        <p>Fine-tuning, RAG pipelines, and building with OpenAI &amp; HuggingFace APIs.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:55%"></div></div>
+          <span>55%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-server"></i></div>
+      <div class="currently-body">
+        <h3>System Design</h3>
+        <p>Load balancing, caching, microservices, and databases at scale.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:40%"></div></div>
+          <span>40%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fab fa-docker"></i></div>
+      <div class="currently-body">
+        <h3>Docker &amp; DevOps</h3>
+        <p>Containerizing apps, writing Dockerfiles, CI/CD pipelines for real deployments.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:30%"></div></div>
+          <span>30%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-code-branch"></i></div>
+      <div class="currently-body">
+        <h3>Open Source</h3>
+        <p>Making first contributions, reviewing codebases, submitting real PRs.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:20%"></div></div>
+          <span>Just started</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CERTIFICATES -->
+<section id="certificates" class="section fade-section">
+  <div class="section-label">09 / Certificates</div>
+  <h2 class="section-title">Credentials</h2>
+  <div class="cert-grid">
+    <div class="cert-card" onclick="openModal('images/cert1.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert1.jpg" alt="Certificate 1">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+    <div class="cert-card" onclick="openModal('images/cert2.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert2.jpg" alt="Certificate 2">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+  </div>
+</section>
+
+<div id="modal" onclick="closeModal()">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <img id="modal-img" alt="Certificate">
+</div>
+
+<!-- 10 CONTACT -->
+<section id="contact" class="section fade-section">
+  <div class="section-label">10 / Contact</div>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <h2 class="section-title">Let's work<br>together</h2>
+      <p class="contact-sub">Open to internships, full-time roles, and interesting projects. I respond within 24 hours.</p>
+      <div class="contact-info">
+        <div class="contact-detail"><i class="fas fa-envelope"></i> your@email.com</div>
+        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> India · Open to remote</div>
+      </div>
+      <div class="contact-social">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-form-wrap">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="fname" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="femail" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="fmsg" placeholder="What's on your mind?" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span id="btnText">Send Message</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div id="formMsg" class="form-msg"></div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Yash<span class="dot">.</span></span>
+    <span class="footer-copy">© 2026 — Built with care</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<button id="topBtn" onclick="scrollTop()" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
