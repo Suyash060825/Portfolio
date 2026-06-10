@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── SEO ── -->
+<title>Yash — About Me !</title>
+<meta name="description" content="Portfolio of Yash, a Computer Science student building scalable applications, AI systems, and clean software. Open to internships and full-time roles.">
+<meta name="keywords" content="Yash, Software Engineer, AI Developer, Portfolio, React, Python, Machine Learning, India">
+<meta name="author" content="Yash">
+<meta name="theme-color" content="#04060d">
+
+<!-- ── OPEN GRAPH (LinkedIn, WhatsApp previews) ── -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://yash.dev">
+<meta property="og:title"       content="Yash — Software Engineer & AI Developer">
+<meta property="og:description" content="Building scalable applications and AI systems. Open to internships and full-time roles.">
+<meta property="og:image"       content="https://yash.dev/images/og-preview.jpg">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- ── TWITTER CARD ── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Yash — Software Engineer & AI Developer">
+<meta name="twitter:description" content="Building scalable applications and AI systems.">
+<meta name="twitter:image"       content="https://yash.dev/images/og-preview.jpg">
+
+<!-- ── CANONICAL ── -->
+<link rel="canonical" href="https://yash.dev">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- GLOBAL STAR CANVAS -->
+<canvas id="starCanvas"></canvas>
+
+<a href="#about" class="skip-link">Skip to main content</a>
+
+<!-- READING PROGRESS BAR -->
+<div id="readingProgress"></div>
+
+<!-- CURSOR -->
+<div id="cursor"><span id="cursorLabel"></span></div>
+<div id="cursor-trail"></div>
+
+<!-- COMMAND PALETTE -->
+<div id="cmdOverlay" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div id="cmdPalette">
+    <div id="cmdHeader">
+      <i class="fas fa-search" id="cmdIcon"></i>
+      <input id="cmdInput" type="text" placeholder="Search sections, actions…" autocomplete="off" spellcheck="false">
+      <kbd id="cmdEsc">ESC</kbd>
+    </div>
+    <div id="cmdResults" role="listbox"></div>
+    <div id="cmdFooter">
+      <span><kbd>↑↓</kbd> navigate</span>
+      <span><kbd>↵</kbd> select</span>
+      <span><kbd>ESC</kbd> close</span>
+    </div>
+  </div>
+</div>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-name">Y<span>.</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <span class="loader-pct" id="loaderPct">0%</span>
+  </div>
+</div>
+
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Y<span class="dot">.</span></div>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span>
+  </div>
+  <ul id="nav-links">
+    <li><a href="#about"        onclick="closeMenu()">About</a></li>
+    <li><a href="#skills"       onclick="closeMenu()">Skills</a></li>
+    <li><a href="#education"    onclick="closeMenu()">Education</a></li>
+    <li><a href="#projects"     onclick="closeMenu()">Projects</a></li>
+    <li><a href="#github"       onclick="closeMenu()">GitHub</a></li>
+    <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
+    <li><a href="#certificates" onclick="closeMenu()">Certs</a></li>
+    <li><a href="#contact"      onclick="closeMenu()">Contact</a></li>
+    <li><button class="cmd-nav-btn" onclick="openCmd()" aria-label="Open command palette"><kbd>⌘K</kbd></button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<main id="main-content">
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal-up" style="--d:0.1s">
+      <span class="eyebrow-dot"></span>Available for opportunities
+    </div>
+    <h1 class="hero-title">
+      <span class="reveal-up" style="--d:0.2s">Hi, I'm</span>
+      <span class="hero-name reveal-up" style="--d:0.35s">Suyash</span>
+    </h1>
+    <p class="hero-sub reveal-up" style="--d:0.5s">
+      Software Engineer &nbsp;&middot;&nbsp; keen & Enthusiast &nbsp;&middot;&nbsp; Problem Solver
+    </p>
+    <div class="hero-actions reveal-up" style="--d:0.65s">
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="resume.pdf" download class="btn btn-ghost"><i class="fas fa-download"></i> Resume</a>
+      <a href="#contact"  class="btn btn-outline">Hire Me</a>
+    </div>
+    <div class="socials reveal-up" style="--d:0.8s">
+      <a href="#" aria-label="View GitHub profile"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="View LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">scroll</div>
+</section>
+
+<!-- 01 ABOUT -->
+<section id="about" class="section fade-section">
+  <div class="section-label">01 / About</div>
+  <div class="about-layout">
+    <div class="about-left">
+      <div class="profile-wrap">
+        <img src="images/profile.jpg" class="profile-img" alt="Yash — Software Engineer" loading="lazy" decoding="async">
+        <div class="profile-deco"></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <h2 class="section-title">Building things<br>that <em>matter</em></h2>
+      <p class="about-bio">
+        Computer Science student with a focus on scalable applications, AI systems, Cloud deployment, security, and clean engineering. I care deeply about building software that actually works — not just looks good.
+      </p>
+      <div class="about-tags">
+        <span>Problem Solver</span>
+        <span>Fast Learner</span>
+        <span>AI Enthusiast</span>
+        <span>Open Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 SKILLS -->
+<section id="skills" class="section fade-section">
+  <div class="section-label">02 / Skills</div>
+  <h2 class="section-title">What I work with</h2>
+
+  <div class="skills-tabs" role="tablist" aria-label="Skill categories">
+    <button class="stab active" data-tab="frontend" role="tab" aria-selected="true"  aria-controls="tab-frontend">Frontend</button>
+    <button class="stab" data-tab="backend"  role="tab" aria-selected="false" aria-controls="tab-backend">Backend</button>
+    <button class="stab" data-tab="tools"    role="tab" aria-selected="false" aria-controls="tab-tools">Tools &amp; Data</button>
+    <button class="stab" data-tab="ai"       role="tab" aria-selected="false" aria-controls="tab-ai">AI / ML</button>
+    <button class="stab" data-tab="cloud" role="tab" aria-selected="false" aria-controls="tab-cloud">Cloud & DevOps</button>
+    <button class="stab" data-tab="cyber" role="tab" aria-selected="false" aria-controls="tab-cyber">Cybersecurity</button>
+  </div>
+
+  <div class="skills-panels">
+    <div class="skills-panel active" id="tab-frontend" role="tabpanel" aria-labelledby="tab-frontend">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>HTML &amp; CSS</span><span class="skill-pct">92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:92%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>JavaScript</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>React</span><span class="skill-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Responsive Design</span><span class="skill-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>HTML5</span><span>CSS3</span><span>JavaScript ES6+</span><span>React</span><span>Tailwind</span><span>Figma</span></div>
+    </div>
+    <div class="skills-panel" id="tab-backend">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Java</span><span class="skill-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Python</span><span class="skill-pct">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:78%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Node.js</span><span class="skill-pct">60%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:60%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>REST APIs</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>Java</span><span>Python</span><span>Node.js</span><span>Express</span><span>REST APIs</span><span>OOP</span></div>
+    </div>
+    <div class="skills-panel" id="tab-tools">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Git &amp; GitHub</span><span class="skill-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>SQL / MySQL</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Linux / CLI</span><span class="skill-pct">65%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>VS Code</span><span class="skill-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:95%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>Git</span><span>GitHub</span><span>MySQL</span><span>Postman</span><span>Linux</span><span>Docker (basic)</span></div>
+    </div>
+    <div class="skills-panel" id="tab-ai">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Machine Learning</span><span class="skill-pct">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>NLP / Transformers</span><span class="skill-pct">62%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:62%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Data Analysis</span><span class="skill-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Deep Learning</span><span class="skill-pct">52%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:52%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>scikit-learn</span><span>HuggingFace</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>TensorFlow</span><span>FIASS</span><span>RAG</span><span>GenAI</span></div>
+    </div>
+    <div class="skills-panel" id="tab-cloud" role="tabpanel" aria-labelledby="tab-cloud">
+  <div class="skill-row">
+    <div class="skill-bar-item"><div class="skill-bar-meta"><span>AWS (EC2, S3, Lambda, CDK)</span><span class="skill-pct">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:78%"></div></div></div>
+    <div class="skill-bar-item"><div class="skill-bar-meta"><span>Docker & CI/CD</span><span class="skill-pct">72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:72%"></div></div></div>
+    <div class="skill-bar-item"><div class="skill-bar-meta"><span>Serverless Architecture</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+    <div class="skill-bar-item"><div class="skill-bar-meta"><span>Git & GitHub</span><span class="skill-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div></div>
+  </div>
+    <div class="skill-chips"><span>AWS CDK</span><span>Lambda</span><span>Step Functions</span><span>DynamoDB</span><span>S3</span><span>Docker</span><span>CI/CD</span><span>Apache Kafka</span><span>GitHub</span></div>
+    </div>
+
+    <div class="skills-panel" id="tab-cyber" role="tabpanel" aria-labelledby="tab-cyber">
+      <div class="skill-row">
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Threat Detection & IDS/XDR</span><span class="skill-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>MITRE ATT&amp;CK Framework</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>AI Security & Adversarial ML</span><span class="skill-pct">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:70%"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-meta"><span>Network Security & SOC Ops</span><span class="skill-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:68%"></div></div></div>
+      </div>
+      <div class="skill-chips"><span>IDS/XDR</span><span>MITRE ATT&CK</span><span>Shannon Entropy</span><span>SHAP/XAI</span><span>PGD Hardening</span><span>Threat Intel</span><span>Phishing Analysis</span><span>SOC Operations</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 STATS -->
+<section id="achievements" class="achievements-strip fade-section">
+  <div class="section-inner">
+    <div class="section-label" style="text-align:center;margin-bottom:48px;">03 / By the numbers</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">Projects shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="70+">0</div>
+        <div class="stat-label">LeetCode problems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="100+">0</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="8">0</div>
+        <div class="stat-label">Technologies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 EDUCATION -->
+<section id="education" class="section fade-section">
+  <div class="section-label">04 / Education</div>
+  <h2 class="section-title">Where I've studied</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2023 — 2027</div>
+        <h3>B.E. Computer Science &amp; Engineering</h3>
+        <p>Acharya Institue of Technology, VTU</p>
+        <div class="timeline-tags">
+          <span>Data Structures</span><span>AI/ML</span><span>System Design</span><span>DBMS</span><span>OS</span><span>Cloud</span><span>SDLC</span>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2022 — 2023</div>
+        <h3>Science with PCM &amp; CS</h3>
+        <p>Kendriya Vidyalaya No.3 AFS Bhatinda, CBSE</p>
+        <div class="timeline-tags">
+          <span>Head Boy</span><span>House Captain</span><span>Team Work</span><span>Co-curricular Activities</span><span>Python</span>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2020 — 2021</div>
+        <h3>Science</h3>
+        <p>Kendriya Vidyalaya No.3 AFS Bhatinda, CBSE</p>
+        <div class="timeline-tags">
+          <span>Vice House Captain</span><span>Discipline Captain</span><span>Team Work</span><span>Sports</span><span>Skit</span><span>Covid</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROJECTS -->
+<section id="projects" class="section fade-section">
+  <div class="section-label">05 / Projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="filter-bar" role="group" aria-label="Filter projects">
+    <button class="filter-btn active" onclick="filterProjects('all',this)"        aria-pressed="true">All</button>
+    <button class="filter-btn"        onclick="filterProjects('web',this)"         aria-pressed="false">Web</button>
+    <button class="filter-btn"        onclick="filterProjects('ai',this)"          aria-pressed="false">AI</button>
+    <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Blockchain</button>
+    <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Cloud & Devops</button>
+    <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Cybersecurity</button>
+  </div>
+  <div class="projects-carousel" id="projectsCarousel">
+  <div class="projects-grid" id="projectsGrid">
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">01</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Web</span><span>Full-Stack</span></div>
+        <h3>Hospital Management System</h3>
+        <p>Automated patient records, appointments &amp; billing. Reduced manual processing time by 40% through intelligent workflow design.</p>
+        <div class="project-stack">HTML · CSS · JavaScript · MySQL</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+    <article class="project-card ai" data-cat="ai">
+      <div class="project-number">02</div>
+      <div class="project-body">
+        <div class="project-tags"><span>AI</span><span>NLP</span></div>
+        <h3>AI Text Summarizer</h3>
+        <p>NLP pipeline using transformer models that reduces document length by 70% while preserving key context and meaning.</p>
+        <div class="project-stack">Python · Transformers · HuggingFace</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+    <article class="project-card blockchain" data-cat="blockchain">
+      <div class="project-number">03</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Blockchain</span><span>Web3</span></div>
+        <h3>Blockchain Voting System</h3>
+        <p>Secure decentralized voting via smart contracts. Eliminates duplicate votes and ensures 100% transparent, tamper-proof results.</p>
+        <div class="project-stack">Solidity · Web3.js · Ethereum</div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+  </div><!-- /projects-grid -->
+  </div><!-- /projects-carousel -->
+</section>
+<section id="github" class="section fade-section">
+  <div class="section-label">06 / GitHub</div>
+  <h2 class="section-title">Code in the <em>open</em></h2>
+  <div class="github-layout">
+    <div class="github-stats-wrap">
+      <img
+        src="https://github-readme-stats.vercel.app/api?username=Suyash060825&show_icons=true&theme=transparent&title_color=c8ff57&text_color=8490a8&icon_color=7c6aff&border_color=ffffff15&hide_border=false&bg_color=0d1120"
+        alt="GitHub Stats"
+        class="github-stat-img"
+        loading="lazy"
+      >
+      <img
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=Suyash060825&layout=compact&theme=transparent&title_color=c8ff57&text_color=8490a8&border_color=ffffff15&bg_color=0d1120"
+        alt="Top Languages"
+        class="github-stat-img"
+        loading="lazy"
+      >
+    </div>
+    <div class="github-streak-wrap">
+      <img
+        src="https://github-readme-streak-stats.herokuapp.com?user=Suyash060825&theme=transparent&ring=c8ff57&fire=7c6aff&currStreakLabel=c8ff57&sideLabels=8490a8&dates=8490a8&border=ffffff15"
+        alt="GitHub Streak"
+        class="github-streak-img"
+        loading="lazy"
+      >
+    </div>
+  </div>
+  <div class="github-cta">
+    <a href="https://github.com/Suyash060825" target="_blank" class="btn btn-ghost">
+      <i class="fab fa-github"></i> View All Repositories
+    </a>
+  </div>
+</section>
+
+<!-- 07 TESTIMONIALS -->
+<section id="testimonials" class="section fade-section">
+  <div class="section-label">07 / What people say</div>
+  <h2 class="section-title">Testimonials</h2>
+  <div class="testimonials-grid">
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Yash consistently delivered clean, well-structured code. His ability to pick up new concepts quickly and apply them to real problems stood out in our team project.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">KS</div>
+        <div>
+          <div class="testi-name">Prof. K. Sharma</div>
+          <div class="testi-role">CS Faculty, XYZ University</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Working with Yash on the hospital system was a great experience. He took ownership of the database layer completely and optimized queries we didn't even know were slow.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Ravi Kumar</div>
+          <div class="testi-role">Team Lead, Hackathon Project</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">One of the most proactive students I've mentored. Yash asks the right questions, ships fast, and never stops iterating until it actually works.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div>
+          <div class="testi-name">Aarav Mehta</div>
+          <div class="testi-role">Senior Dev, Open Source Mentor</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 08 CURRENTLY LEARNING -->
+<section id="currently" class="section fade-section">
+  <div class="section-label">08 / Right now</div>
+  <h2 class="section-title">What I'm <em>exploring</em></h2>
+  <div class="currently-grid">
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-brain"></i></div>
+      <div class="currently-body">
+        <h3>Large Language Models</h3>
+        <p>Fine-tuning, RAG pipelines, and building with OpenAI &amp; HuggingFace APIs.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:55%"></div></div>
+          <span>55%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-server"></i></div>
+      <div class="currently-body">
+        <h3>System Design</h3>
+        <p>Load balancing, caching, microservices, and databases at scale.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:40%"></div></div>
+          <span>40%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fab fa-docker"></i></div>
+      <div class="currently-body">
+        <h3>Docker &amp; DevOps</h3>
+        <p>Containerizing apps, writing Dockerfiles, CI/CD pipelines for real deployments.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:30%"></div></div>
+          <span>30%</span>
+        </div>
+      </div>
+    </div>
+    <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-code-branch"></i></div>
+      <div class="currently-body">
+        <h3>Open Source</h3>
+        <p>Making first contributions, reviewing codebases, submitting real PRs.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:20%"></div></div>
+          <span>Just started</span>
+        </div>
+      </div>
+    </div>  
+      <div class="currently-card">
+        <div class="currently-icon"><i class="fas fa-code-branch"></i> </div>
+        <div class="currently-body">
+          <h3>Blockchain</h3>
+          <p>Understanding Smart contracts, Solidity, Hardhat, Ledger, Ethereum</p>
+          <div class="currently-progress">
+            <div class="progress-track"><div class="progress-fill" style="--w:30%"></div></div>
+            <span>Just started</span>
+          </div>
+        </div>
+      </div>
+     <div class="currently-card">
+      <div class="currently-icon"><i class="fas fa-code-branch"></i></div>
+      <div class="currently-body">
+        <h3>Cybersecurity</h3>
+        <p>Building production-grade threat detection with MITRE ATT&CK, anomaly ML models, and real-time SOC pipelines.</p>
+        <div class="currently-progress">
+          <div class="progress-track"><div class="progress-fill" style="--w:10%"></div></div>
+          <span>Just started</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 HOW I WORK -->
+<section id="process" class="section fade-section">
+  <div class="section-label">09 / Process</div>
+  <h2 class="section-title">How I <em>work</em></h2>
+  <div class="process-grid">
+
+    <div class="process-card">
+      <div class="process-step">01</div>
+      <div class="process-icon"><i class="fas fa-lightbulb"></i></div>
+      <h3>Think</h3>
+      <p>I start by deeply understanding the problem — not jumping to solutions. What's the actual pain? Who feels it? What does success look like in 6 months?</p>
+      <ul class="process-list">
+        <li>User research &amp; requirements</li>
+        <li>Architecture planning</li>
+        <li>Edge case mapping</li>
+      </ul>
+    </div>
+
+    <div class="process-connector"><i class="fas fa-arrow-right"></i></div>
+
+    <div class="process-card">
+      <div class="process-step">02</div>
+      <div class="process-icon"><i class="fas fa-hammer"></i></div>
+      <h3>Build</h3>
+      <p>Ship fast, iterate faster. I write clean, documented code in small commits. Every feature is testable and every decision is explainable.</p>
+      <ul class="process-list">
+        <li>Modular, readable code</li>
+        <li>Version control discipline</li>
+        <li>Continuous testing</li>
+      </ul>
+    </div>
+
+    <div class="process-connector"><i class="fas fa-arrow-right"></i></div>
+
+    <div class="process-card">
+      <div class="process-step">03</div>
+      <div class="process-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Measure</h3>
+      <p>Code that ships isn't done — it's the start. I track real metrics, gather feedback, and improve. Numbers tell the truth that instincts miss.</p>
+      <ul class="process-list">
+        <li>Performance profiling</li>
+        <li>User feedback loops</li>
+        <li>Iterative improvement</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- FUN FACTS TICKER -->
+<div class="ticker-strip" aria-label="Fun facts about Yash">
+  <div class="ticker-track">
+    <span class="ticker-item"><i class="fas fa-terminal"></i> 400+ LeetCode problems</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-mug-hot"></i> Chai over coffee, always</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-moon"></i> 3am debugger</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-brain"></i> INTJ · Systems thinker</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-rocket"></i> Building in public</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-book"></i> Currently reading: Clean Code</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-music"></i> Lo-fi while coding</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-globe"></i> Open to remote worldwide</span>
+    <span class="ticker-sep">·</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><i class="fas fa-terminal"></i> 400+ LeetCode problems</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-mug-hot"></i> Chai over coffee, always</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-moon"></i> 3am debugger</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-brain"></i> INTJ · Systems thinker</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-rocket"></i> Building in public</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-book"></i> Currently reading: Clean Code</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-music"></i> Lo-fi while coding</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item"><i class="fas fa-globe"></i> Open to remote worldwide</span>
+    <span class="ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- 10 CERTIFICATES -->
+<section id="certificates" class="section fade-section">
+  <div class="section-label">10 / Certificates</div>
+  <h2 class="section-title">Credentials</h2>
+  <div class="cert-grid">
+    <div class="cert-card" onclick="openModal('images/cert1.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert1.jpg" alt="Certificate 1">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+    <div class="cert-card" onclick="openModal('images/cert2.jpg')">
+      <div class="cert-thumb">
+        <img src="images/cert2.jpg" alt="Certificate 2">
+        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <p class="cert-name">Certificate Name</p>
+      <span class="cert-org">Issuing Organization</span>
+    </div>
+  </div>
+</section>
+
+<div id="modal" onclick="closeModal()">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <img id="modal-img" alt="Certificate">
+</div>
+
+<!-- 11 CONTACT -->
+<section id="contact" class="section fade-section">
+  <div class="section-label">11 / Contact</div>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <h2 class="section-title">Let's work<br>together</h2>
+      <p class="contact-sub">Open to internships, full-time roles, and interesting projects. I respond within 24 hours.</p>
+      <div class="contact-info">
+        <div class="contact-detail"><i class="fas fa-envelope"></i> your@email.com</div>
+        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> India · Open to remote</div>
+      </div>
+      <div class="contact-social">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-form-wrap">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="fname" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="femail" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="fmsg" placeholder="What's on your mind?" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span id="btnText">Send Message</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div id="formMsg" class="form-msg"></div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Yash<span class="dot">.</span></span>
+    <span class="footer-copy">© 2026 — Built with care</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+
+<button id="topBtn" onclick="scrollTop()" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
