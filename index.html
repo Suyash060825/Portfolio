@@ -114,8 +114,8 @@
       <a href="#contact"  class="btn btn-outline">Hire Me</a>
     </div>
     <div class="socials reveal-up" style="--d:0.8s">
-      <a href="#" aria-label="View GitHub profile"><i class="fab fa-github"></i></a>
-      <a href="#" aria-label="View LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Suyash060825" aria-label="View GitHub profile"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/suyash-pradhan-b0b0162b7/" aria-label="View LinkedIn profile"><i class="fab fa-linkedin"></i></a>
     </div>
   </div>
   <div class="hero-scroll-hint">scroll</div>
@@ -294,50 +294,126 @@
     <button class="filter-btn"        onclick="filterProjects('web',this)"         aria-pressed="false">Web</button>
     <button class="filter-btn"        onclick="filterProjects('ai',this)"          aria-pressed="false">AI</button>
     <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Blockchain</button>
-    <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Cloud & Devops</button>
-    <button class="filter-btn"        onclick="filterProjects('blockchain',this)"  aria-pressed="false">Cybersecurity</button>
+    <button class="filter-btn"        onclick="filterProjects('cloud',this)"       aria-pressed="false">Cloud & DevOps</button>
+    <button class="filter-btn"        onclick="filterProjects('cyber',this)"       aria-pressed="false">Cybersecurity</button>
   </div>
   <div class="projects-carousel" id="projectsCarousel">
   <div class="projects-grid" id="projectsGrid">
-    <article class="project-card web" data-cat="web">
+
+    <!-- 01 AHRAS -->
+    <article class="project-card cyber" data-cat="cyber">
       <div class="project-number">01</div>
       <div class="project-body">
-        <div class="project-tags"><span>Web</span><span>Full-Stack</span></div>
-        <h3>Hospital Management System</h3>
-        <p>Automated patient records, appointments &amp; billing. Reduced manual processing time by 40% through intelligent workflow design.</p>
-        <div class="project-stack">HTML · CSS · JavaScript · MySQL</div>
+        <div class="project-tags"><span>AI</span><span>Cybersecurity</span><span>ML</span></div>
+        <h3>AHRAS — Adaptive Hybrid Risk-Aware Security System</h3>
+        <p>Hybrid threat detection engine combining Isolation Forest, MLP Autoencoder &amp; One-Class SVM. Achieves F1 = 0.927 with 0% false positive rate, processing 376+ events/sec via Apache Kafka with MITRE ATT&amp;CK mapping.</p>
+        <div class="project-stack">Python · Scikit-learn · FastAPI · Kafka · MongoDB</div>
       </div>
       <div class="project-links">
-        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+        <a href="https://github.com/Sushant-ranjan01/AHRAS" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </article>
+
+    <!-- 02 Enterprise Knowledge Intelligence -->
     <article class="project-card ai" data-cat="ai">
       <div class="project-number">02</div>
       <div class="project-body">
-        <div class="project-tags"><span>AI</span><span>NLP</span></div>
-        <h3>AI Text Summarizer</h3>
-        <p>NLP pipeline using transformer models that reduces document length by 70% while preserving key context and meaning.</p>
-        <div class="project-stack">Python · Transformers · HuggingFace</div>
+        <div class="project-tags"><span>AI</span><span>RAG</span><span>NLP</span></div>
+        <h3>Enterprise Knowledge Intelligence System</h3>
+        <p>Fully offline Version-Aware RAG system using FAISS HNSW and Mistral-7B. Sub-50ms retrieval across 10,000+ document chunks with 4-signal Weighted Hybrid Matching, reducing outdated document retrieval by 62%.</p>
+        <div class="project-stack">Python · FAISS · Mistral-7B · Ollama · FastAPI</div>
       </div>
       <div class="project-links">
-        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-        <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+        <a href="https://github.com/Suyash060825/Main_Project" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </article>
-    <article class="project-card blockchain" data-cat="blockchain">
+
+    <!-- 03 Serverless Doc Processing -->
+    <article class="project-card cloud" data-cat="cloud">
       <div class="project-number">03</div>
       <div class="project-body">
-        <div class="project-tags"><span>Blockchain</span><span>Web3</span></div>
-        <h3>Blockchain Voting System</h3>
-        <p>Secure decentralized voting via smart contracts. Eliminates duplicate votes and ensures 100% transparent, tamper-proof results.</p>
-        <div class="project-stack">Solidity · Web3.js · Ethereum</div>
+        <div class="project-tags"><span>Cloud</span><span>AWS</span><span>Serverless</span></div>
+        <h3>Serverless Intelligent Document Processing Platform</h3>
+        <p>End-to-end serverless AWS pipeline with API Gateway, Cognito JWT, S3, SQS + DLQ and Lambda via CDK. Orchestrates 4-state AI extraction using Textract + Comprehend with full CI/CD and X-Ray tracing.</p>
+        <div class="project-stack">AWS CDK · Lambda · Step Functions · DynamoDB · Textract</div>
       </div>
       <div class="project-links">
-        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://github.com/Suyash060825/Serverless-Doc-Processing" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </article>
+
+    <!-- 04 SynergySphere -->
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">04</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Web</span><span>Full-Stack</span><span>React</span></div>
+        <h3>SynergySphere — Team Collaboration Platform</h3>
+        <p>Advanced team collaboration platform with project management, task tracking, and threaded discussions. Built with React 18, TypeScript, TailwindCSS and shadcn/ui with React Query for state management.</p>
+        <div class="project-stack">React 18 · TypeScript · TailwindCSS · shadcn/ui · Vite</div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Suyash060825/SynergySphere" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </article>
+
+    <!-- 05 Disaster Supply Chain -->
+    <article class="project-card blockchain" data-cat="blockchain">
+      <div class="project-number">05</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Blockchain</span><span>Web3</span><span>AI</span></div>
+        <h3>Disaster Supply Chain Management</h3>
+        <p>Decentralized supply chain system for disaster relief using smart contracts to ensure transparent, tamper-proof resource allocation and distribution tracking across relief operations.</p>
+        <div class="project-stack">Solidity · Web3.js · Blockchain · Smart Contracts</div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Suyash060825/Disaster-Supply-Chain" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </article>
+
+    <!-- 06 AI Video Summarizer -->
+    <article class="project-card ai" data-cat="ai">
+      <div class="project-number">06</div>
+      <div class="project-body">
+        <div class="project-tags"><span>AI</span><span>NLP</span><span>Web</span></div>
+        <h3>AI Video Summarizer &amp; Quiz Generator</h3>
+        <p>End-to-end AI web app that auto-transcribes YouTube videos, generates concise summaries, and creates contextual multiple-choice quizzes using NLP-based transcript processing.</p>
+        <div class="project-stack">Python · NLP · AI APIs · Web</div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Suyash060825/Mini-project" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </article>
+
+    <!-- 07 YouTube Clone -->
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">07</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Web</span><span>Frontend</span></div>
+        <h3>YouTube Clone</h3>
+        <p>Pixel-accurate, fully responsive YouTube UI replica featuring video cards, sidebar navigation, hover animations and adaptive layouts. Demonstrates CSS Grid, Flexbox and component-level design patterns.</p>
+        <div class="project-stack">HTML · CSS · JavaScript</div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Suyash060825/Youtube-Clone" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://suyash060825.github.io/Youtube-Clone/YouTube.html" target="_blank" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
+      </div>
+    </article>
+
+    <!-- 08 Portfolio -->
+    <article class="project-card web" data-cat="web">
+      <div class="project-number">08</div>
+      <div class="project-body">
+        <div class="project-tags"><span>Web</span><span>Frontend</span></div>
+        <h3>Personal Portfolio Website</h3>
+        <p>This portfolio — built with a deep space visual theme, animated star canvas, command palette, custom cursor, and 11 detailed sections. Optimised for performance with GPU-accelerated animations.</p>
+        <div class="project-stack">HTML · CSS · JavaScript · Canvas API</div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Suyash060825/Portfolio" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
         <a href="#" class="project-link accent"><i class="fas fa-external-link-alt"></i> Live</a>
       </div>
     </article>
+
   </div><!-- /projects-grid -->
   </div><!-- /projects-carousel -->
 </section>
@@ -586,25 +662,289 @@
 <section id="certificates" class="section fade-section">
   <div class="section-label">10 / Certificates</div>
   <h2 class="section-title">Credentials</h2>
-  <div class="cert-grid">
-    <div class="cert-card" onclick="openModal('images/cert1.jpg')">
-      <div class="cert-thumb">
-        <img src="images/cert1.jpg" alt="Certificate 1">
-        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
-      </div>
-      <p class="cert-name">Certificate Name</p>
-      <span class="cert-org">Issuing Organization</span>
-    </div>
-    <div class="cert-card" onclick="openModal('images/cert2.jpg')">
-      <div class="cert-thumb">
-        <img src="images/cert2.jpg" alt="Certificate 2">
-        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
-      </div>
-      <p class="cert-name">Certificate Name</p>
-      <span class="cert-org">Issuing Organization</span>
-    </div>
+  <p style="color:var(--text-2); margin-bottom:2.5rem">
+    100+ credentials across AI/ML, Cloud, Cybersecurity, Software Dev, and more.
+  </p>
+
+  <!-- Tabs -->
+  <div class="cert-tabs" role="tablist">
+    <button class="cert-tab active" data-filter="ai">AI / ML</button>
+    <button class="cert-tab" data-filter="cloud">Cloud & DevOps</button>
+    <button class="cert-tab" data-filter="cyber">Cybersecurity</button>
+    <button class="cert-tab" data-filter="dev">Software Dev</button>
+    <button class="cert-tab" data-filter="data">Data Science</button>
+    <button class="cert-tab" data-filter="other">Other</button>
   </div>
+
+  <div class="cert-grid-v2" id="certGrid">
+
+    <!-- AI / ML -->
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-brain" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Deep Learning with Python</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-robot" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Principles of Gen AI</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-project-diagram" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Machine Learning & AI Foundations</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Mar 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-eye" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Computer Vision 101</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-comment-dots" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">NLP Basics</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-microchip" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Prompt Engineering</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="ai">
+      <div class="cert-icon-wrap" style="background:rgba(200,255,87,0.08)"><i class="fas fa-fire" style="color:#c8ff57"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Deep Learning Basics</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <!-- Cloud & DevOps (hidden by default) -->
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cloud" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(124,106,255,0.1)"><i class="fab fa-aws" style="color:#7c6aff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">AWS Industry Readiness Program</p>
+        <span class="cert-issuer">Acharya Institute</span>
+        <span class="cert-date">Mar 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cloud" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(124,106,255,0.1)"><i class="fas fa-cloud" style="color:#7c6aff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Intro to Cloud Computing for IT Pros</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cloud" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(124,106,255,0.1)"><i class="fas fa-network-wired" style="color:#7c6aff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Cloud Computing: Networking</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cloud" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(124,106,255,0.1)"><i class="fas fa-infinity" style="color:#7c6aff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Agile Software Development</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <!-- Cybersecurity -->
+    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/MJ8GgDq793hfcdFHS" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cyber" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,100,100,0.1)"><i class="fas fa-shield-alt" style="color:#ff6464"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Mastercard Cybersecurity Simulation</p>
+        <span class="cert-issuer">Forage</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cyber" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,100,100,0.1)"><i class="fas fa-user-secret" style="color:#ff6464"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Ethics in Cybersecurity</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="cyber" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,100,100,0.1)"><i class="fas fa-fish" style="color:#ff6464"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Cybersecurity Awareness: AI & Phishing</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Feb 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <!-- Software Dev -->
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="dev" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,180,0,0.1)"><i class="fas fa-sitemap" style="color:#ffb400"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Software Architecture: Dev to Architect</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="dev" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,180,0,0.1)"><i class="fab fa-react" style="color:#ffb400"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">React Essential Training</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.coursera.org/verify/FXHWWTB7TYLS" target="_blank" rel="noopener" class="cert-card-v2" data-filter="dev" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,180,0,0.1)"><i class="fas fa-database" style="color:#ffb400"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">MySQL with Information Technology</p>
+        <span class="cert-issuer">Coursera</span>
+        <span class="cert-date">Nov 2024</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="dev" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,180,0,0.1)"><i class="fab fa-git-alt" style="color:#ffb400"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Learning Git and GitHub</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="dev" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(255,180,0,0.1)"><i class="fas fa-code-branch" style="color:#ffb400"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Software Development Life Cycle</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">Jan 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <!-- Data Science -->
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="data" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(0,200,180,0.1)"><i class="fas fa-chart-bar" style="color:#00c8b4"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Python for Data Science & ML Training</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="data" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(0,200,180,0.1)"><i class="fas fa-flask" style="color:#00c8b4"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Data Science Basics</p>
+        <span class="cert-issuer">Infosys Springboard</span>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/learning/certificates/" target="_blank" rel="noopener" class="cert-card-v2" data-filter="data" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(0,200,180,0.1)"><i class="fas fa-cogs" style="color:#00c8b4"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Data Engineering Foundations</p>
+        <span class="cert-issuer">LinkedIn</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <!-- Other -->
+    <a href="https://coursera.org/verify/U9CE96PGV4FL" target="_blank" rel="noopener" class="cert-card-v2" data-filter="other" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(100,180,255,0.1)"><i class="fas fa-solar-panel" style="color:#64b4ff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Renewable Energy Technology Fundamentals</p>
+        <span class="cert-issuer">Univ. of Colorado Boulder</span>
+        <span class="cert-date">May 2026</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://coursera.org/verify/GZ8LG3ZJNFCA" target="_blank" rel="noopener" class="cert-card-v2" data-filter="other" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(100,180,255,0.1)"><i class="fas fa-language" style="color:#64b4ff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">English for Career Development</p>
+        <span class="cert-issuer">Univ. of Pennsylvania</span>
+        <span class="cert-date">Mar 2024</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+    <a href="https://www.credly.com/badges/KLAK9AESEN7G" target="_blank" rel="noopener" class="cert-card-v2" data-filter="other" style="display:none">
+      <div class="cert-icon-wrap" style="background:rgba(100,180,255,0.1)"><i class="fas fa-lightbulb" style="color:#64b4ff"></i></div>
+      <div class="cert-info">
+        <p class="cert-name-v2">Solving Problems with Critical Thinking</p>
+        <span class="cert-issuer">IBM</span>
+        <span class="cert-date">Sep 2024</span>
+      </div>
+      <i class="fas fa-external-link-alt cert-link-icon"></i>
+    </a>
+
+  </div>
+
+  <div style="text-align:center; margin-top:3rem">
+    <p style="color:var(--text-2); margin-bottom:1.2rem; font-size:0.9rem">Showing key highlights · 100+ total credentials</p>
+    <a href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener" class="btn btn-outline">
+      <i class="fab fa-linkedin" style="margin-right:8px"></i>View All 100+ on LinkedIn
+    </a>
+  </div>
+
 </section>
+
 
 <div id="modal" onclick="closeModal()">
   <button class="modal-close" onclick="closeModal()">×</button>
@@ -619,13 +959,13 @@
       <h2 class="section-title">Let's work<br>together</h2>
       <p class="contact-sub">Open to internships, full-time roles, and interesting projects. I respond within 24 hours.</p>
       <div class="contact-info">
-        <div class="contact-detail"><i class="fas fa-envelope"></i> your@email.com</div>
-        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> India · Open to remote</div>
+        <div class="contact-detail"><i class="fas fa-envelope"></i> suyashpradhan007@email.com</div>
+        <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> Bengaluru, India · Open to remote</div>
       </div>
-      <div class="contact-social">
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
+      <div class="contact-social">  
+        <a href="https://github.com/Suyash060825" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/suyash-pradhan-b0b0162b7/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
     <div class="contact-right">
@@ -663,8 +1003,8 @@
     <span class="footer-logo">Yash<span class="dot">.</span></span>
     <span class="footer-copy">© 2026 — Built with care</span>
     <div class="footer-socials">
-      <a href="#"><i class="fab fa-github"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Suyash060825"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/suyash-pradhan-b0b0162b7/"><i class="fab fa-linkedin"></i></a>
     </div>
   </div>
 </footer>

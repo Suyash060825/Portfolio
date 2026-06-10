@@ -398,6 +398,21 @@ if (cursor && trail && window.innerWidth > 768) {
   draw();
 })();
 
+
+// ── CERT FILTER TABS ──
+document.querySelectorAll('.cert-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const filter = tab.dataset.filter;
+    document.querySelectorAll('.cert-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('#certGrid .cert-card-v2').forEach(card => {
+      card.style.display = card.dataset.filter === filter ? 'flex' : 'none';
+    });
+  });
+});
+
+
+
 // ── NAVBAR ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
