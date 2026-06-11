@@ -464,6 +464,8 @@ window.addEventListener('load', () => {
 // ── STAT COUNTER ──
 function animateCounter(el) {
   const target = parseInt(el.dataset.target);
+  if (isNaN(target)) return;
+  const suffix = el.dataset.suffix || '';
   const duration = 1800;
   const step = 16;
   const increments = Math.ceil(duration / step);
@@ -471,10 +473,9 @@ function animateCounter(el) {
   const timer = setInterval(() => {
     current++;
     const progress = current / increments;
-    // easeOutExpo
     const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-    el.textContent = Math.round(eased * target);
-    if (current >= increments) { el.textContent = target; clearInterval(timer); }
+    el.textContent = Math.round(eased * target) + suffix;
+    if (current >= increments) { el.textContent = target + suffix; clearInterval(timer); }
   }, step);
 }
 
@@ -572,7 +573,9 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── CONTACT FORM ──
-function handleSubmit(e) {
+// ── CONTACT FORM — Web3Forms (free, unlimited) ──
+// STEP: Replace YOUR_ACCESS_KEY below with the key from web3forms.com
+async function handleSubmit(e) {
   e.preventDefault();
   const btn   = document.querySelector('#contactForm button[type="submit"]');
   const msg   = document.getElementById('formMsg');
@@ -596,14 +599,37 @@ function handleSubmit(e) {
   btn.disabled = true;
   label.textContent = 'Sending...';
 
-  setTimeout(() => {
-    btn.disabled = false;
-    label.textContent = 'Send Message';
-    msg.textContent   = '✓ Message sent! I\'ll get back to you soon.';
-    msg.className     = 'form-msg success';
-    e.target.reset();
-    setTimeout(() => { msg.textContent = ''; }, 5000);
-  }, 1500);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'b85047d1-fea3-4025-86c1-8db34da98b6b',
+        subject: 'New message from portfolio — ' + name,
+        from_name: name,
+        email: email,
+        message: text,
+        botcheck: ''
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      msg.textContent = '✓ Message sent! I\'ll get back to you soon.';
+      msg.className   = 'form-msg success';
+      e.target.reset();
+      setTimeout(() => { msg.textContent = ''; }, 5000);
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    msg.textContent = '✗ Failed to send. Email me at suyashpradhan007@gmail.com';
+    msg.className   = 'form-msg error';
+  }
+
+  btn.disabled = false;
+  label.textContent = 'Send Message';
 }
 
 /* =============================================
@@ -624,28 +650,7 @@ function handleSubmit(e) {
   updateProgress();
 })();
 
-// ── FEATURE 2: ANIMATED STAT COUNTERS (fix: was defined but not triggered properly) ──
-// Already hooked into sectionObs above — but add suffix support here
-(function() {
-  const SUFFIXES = { 400: '+', 3: '', 5: '', 8: '+' };
-  // Override animateCounter to add suffixes
-  window.animateCounter = function(el) {
-    const target   = parseInt(el.dataset.target);
-    if (isNaN(target)) return;
-    const suffix   = el.dataset.suffix || (target >= 100 ? '+' : '');
-    const duration = 1800;
-    const steps    = Math.ceil(duration / 16);
-    let   current  = 0;
-    const timer = setInterval(() => {
-      current++;
-      const t = current / steps;
-      // easeOutExpo
-      const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (current >= steps) { el.textContent = target + suffix; clearInterval(timer); }
-    }, 16);
-  };
-})();
+// Stat counter suffix support merged into animateCounter above
 
 // ── FEATURE 3: COMMAND PALETTE ──
 (function() {
@@ -661,10 +666,10 @@ function handleSubmit(e) {
     { group: 'Navigate', label: 'Certificates',       desc: 'My credentials',          icon: 'fas fa-certificate',      action: () => scrollTo('#certificates') },
     { group: 'Navigate', label: 'Contact',            desc: 'Get in touch',            icon: 'fas fa-envelope',         action: () => scrollTo('#contact') },
     // Actions
-    { group: 'Actions',  label: 'Download Resume',    desc: 'Get my PDF resume',       icon: 'fas fa-download',         action: () => { const a = document.createElement('a'); a.href='resume.pdf'; a.download='Yash_Resume.pdf'; a.click(); } },
-    { group: 'Actions',  label: 'Open GitHub',        desc: 'github.com/YOUR_USERNAME',icon: 'fab fa-github',           action: () => window.open('https://github.com/YOUR_GITHUB_USERNAME', '_blank') },
-    { group: 'Actions',  label: 'Open LinkedIn',      desc: 'Connect with me',         icon: 'fab fa-linkedin',         action: () => window.open('https://linkedin.com/in/YOUR_USERNAME', '_blank') },
-    { group: 'Actions',  label: 'Send Email',         desc: 'Open email client',       icon: 'fas fa-envelope',         action: () => window.location.href='mailto:your@email.com' },
+    { group: 'Actions',  label: 'Download Resume',    desc: 'Get my PDF resume',       icon: 'fas fa-download',         action: () => { const a = document.createElement('a'); a.href='resume.pdf'; a.download='Suyash_Pradhan_Resume.pdf'; a.click(); } },
+    { group: 'Actions',  label: 'Open GitHub',        desc: 'github.com/Suyash060825',icon: 'fab fa-github',           action: () => window.open('https://github.com/Suyash060825', '_blank') },
+    { group: 'Actions',  label: 'Open LinkedIn',      desc: 'Connect with me',         icon: 'fab fa-linkedin',         action: () => window.open('https://www.linkedin.com/in/suyash-pradhan-b0b0162b7/', '_blank') },
+    { group: 'Actions',  label: 'Send Email',         desc: 'Open email client',       icon: 'fas fa-envelope',         action: () => window.location.href='mailto:suyashpradhan007@gmail.com' },
     { group: 'Actions',  label: 'Scroll to Top',      desc: 'Back to the start',       icon: 'fas fa-arrow-up',         action: () => window.scrollTo({top:0,behavior:'smooth'}) },
     // Filter
     { group: 'Projects', label: 'Show All Projects',  desc: 'Remove filter',           icon: 'fas fa-th',               action: () => { scrollTo('#projects'); setTimeout(()=>filterProjects('all', document.querySelector('.filter-btn')),400); } },
@@ -818,7 +823,7 @@ function handleSubmit(e) {
   });
 
   // Links and buttons → purple ring
-  document.querySelectorAll('a, button, .cert-card, .stab, .filter-btn').forEach(el => {
+  document.querySelectorAll('a, button, .cert-card-v2, .stab, .filter-btn').forEach(el => {
     el.addEventListener('mouseenter', () => {
       if (!cursor.classList.contains('cursor-view')) cursor.className = 'cursor-link';
     });
